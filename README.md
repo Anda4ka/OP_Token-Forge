@@ -4,6 +4,8 @@ One-click OP_20 token factory on native Bitcoin L1 via OPNet.
 
 Deploy your own memecoins, DeFi tokens, or utility tokens directly on Bitcoin — no bridges, no L2s.
 
+🌐 **Live**: [optoken-forge-production.up.railway.app](https://optoken-forge-production.up.railway.app/)
+
 ## How It Works
 
 1. **Connect** your OP_WALLET browser extension
@@ -53,6 +55,7 @@ Open http://localhost:5173
 │   └── public/
 │       └── op20-token.wasm  # Pre-built OP_20 token binary
 ├── example-contracts/     # CLI deploy/register scripts
+├── server.js              # Zero-dependency static server (Railway)
 ├── Dockerfile             # Railway deployment
 └── railway.json           # Railway config
 ```
@@ -96,14 +99,16 @@ linkMLDSAPublicKeyToAddress: e.linkMLDSAPublicKeyToAddress ?? true
 
 ### Workaround
 
-Until the official fix is released, you can patch the wallet locally:
+Until the official fix is released, use our pre-patched wallet:
 
-1. Download [OP_WALLET v1.8.1](https://github.com/btc-vision/opwallet/releases/tag/v1.8.1) zip
-2. Extract it
-3. In `background.js`, replace the three hardcoded `linkMLDSAPublicKeyToAddress:!0` occurrences (at byte offsets ~2973865, ~2974799, ~3019961) with the parameter-respecting versions above
-4. Load the patched extension as "unpacked" in `chrome://extensions/`
+1. Download [OP_WALLET v1.8.1 (patched)](https://github.com/Anda4ka/OP_Token-Forge/releases/latest) from Releases
+2. Extract the zip to a folder
+3. Open `chrome://extensions/` in Chrome
+4. Enable "Developer mode" (top right)
+5. Click "Load unpacked" and select the extracted folder
+6. Disable the original OP_WALLET extension to avoid conflicts
 
-**Bug report**: [btc-vision/opwallet](https://github.com/btc-vision/opwallet/issues)
+**Bug report**: [btc-vision/opwallet#169](https://github.com/btc-vision/opwallet/issues/169)
 
 ## License
 
