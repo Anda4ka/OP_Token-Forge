@@ -77,7 +77,8 @@ export async function deployToken(
     const deployResult = await wallet.web3.deployContract({
         from: walletAddress,
         utxos,
-        bytecode: Buffer.from(wasmBytes) as unknown as Uint8Array,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        bytecode: Buffer.from(wasmBytes) as any,
         feeRate: 2,
         priorityFee: 0n,
         gasSatFee: 10_000n,
