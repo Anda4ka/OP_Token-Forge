@@ -12,11 +12,11 @@ COPY frontend/ ./
 # Build
 RUN npm run build
 
-# Serve stage
+# Serve stage — zero-dependency static server
 FROM node:22-alpine
 WORKDIR /app
-RUN npm install -g serve@14
 COPY --from=build /app/dist ./dist
+COPY server.js ./
 
 EXPOSE 3000
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["node", "server.js"]
