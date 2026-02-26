@@ -77,7 +77,7 @@ export async function deployToken(
     const deployResult = await wallet.web3.deployContract({
         from: walletAddress,
         utxos,
-        bytecode: wasmBytes,
+        bytecode: Buffer.from(wasmBytes) as unknown as Uint8Array,
         feeRate: 2,
         priorityFee: 0n,
         gasSatFee: 10_000n,
@@ -247,6 +247,7 @@ export async function deployToken(
 
     console.log('[deploy] Step 3: signAndBroadcastInteraction with linkMLDSAPublicKeyToAddress: false');
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const registerResult = await wallet.web3.signAndBroadcastInteraction({
         from: walletAddress,
         to: FACTORY_ADDRESS,
@@ -260,7 +261,7 @@ export async function deployToken(
         network: opnetTestnet,
         linkMLDSAPublicKeyToAddress: false,
         revealMLDSAPublicKey: false,
-    });
+    } as any);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const broadcastResult = registerResult[1] as any;
