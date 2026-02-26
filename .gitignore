@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Sensitive files
+.quantum_key
+.quantum_key_linked
+.env
+.env.*
+
+# Patched wallet (local dev only)
+opwallet-patched/
+opwallet-bug-report.md
+
+# Claude orchestrator
+.claude/
+.orchestrator/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log

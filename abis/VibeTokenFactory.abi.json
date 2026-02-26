@@ -1,0 +1,184 @@
+{
+    "functions": [
+        {
+            "name": "pause",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "unpause",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "transferOwnership",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "newOwner",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "deployToken",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "STRING"
+                },
+                {
+                    "name": "symbol",
+                    "type": "STRING"
+                },
+                {
+                    "name": "totalSupply",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "decimals",
+                    "type": "UINT8"
+                },
+                {
+                    "name": "tokenAddress",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "token",
+                    "type": "ADDRESS"
+                }
+            ]
+        },
+        {
+            "name": "owner",
+            "type": "View",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "owner",
+                    "type": "STRING"
+                }
+            ]
+        },
+        {
+            "name": "isPaused",
+            "type": "View",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "paused",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "getDeploymentCount",
+            "type": "View",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "count",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "getDeployedTokens",
+            "type": "View",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "tokens",
+                    "type": "ARRAY_OF_ADDRESSES"
+                }
+            ]
+        },
+        {
+            "name": "getDeploymentByIndex",
+            "type": "View",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "token",
+                    "type": "ADDRESS"
+                }
+            ]
+        }
+    ],
+    "events": [
+        {
+            "name": "Paused",
+            "values": [],
+            "type": "Event"
+        },
+        {
+            "name": "Unpaused",
+            "values": [],
+            "type": "Event"
+        },
+        {
+            "name": "OwnershipTransferred",
+            "values": [
+                {
+                    "name": "previousOwner",
+                    "type": "STRING"
+                },
+                {
+                    "name": "newOwner",
+                    "type": "STRING"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "TokenDeployed",
+            "values": [
+                {
+                    "name": "token",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "totalSupply",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "name",
+                    "type": "STRING"
+                },
+                {
+                    "name": "symbol",
+                    "type": "STRING"
+                }
+            ],
+            "type": "Event"
+        }
+    ]
+}

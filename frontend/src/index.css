@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    --color-surface: #0a0a0f;
+    --color-surface-light: #12121a;
+    --color-surface-lighter: #1a1a2e;
+    --color-accent: #7c3aed;
+    --color-accent-light: #a78bfa;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    --color-border: #2a2a3e;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--color-surface);
+    color: #e2e8f0;
+    margin: 0;
+}
+
+.card-glow {
+    position: relative;
+}
+.card-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), transparent 50%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.card-glow:hover::before {
+    opacity: 1;
+}

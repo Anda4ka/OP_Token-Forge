@@ -1,0 +1,46 @@
+{
+  "name": "vibe-token-factory",
+  "version": "0.1.0",
+  "description": "VibeTokenFactory OP_NET smart contract (OP_20 factory/registry)",
+  "type": "module",
+  "scripts": {
+    "build:factory": "asc src/factory/index.ts --target factory --measure --uncheckedBehavior never",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "license": "MIT",
+  "homepage": "https://opnet.org",
+  "keywords": [
+    "bitcoin",
+    "smart-contract",
+    "opnet",
+    "op_20",
+    "factory"
+  ],
+  "dependencies": {
+    "@assemblyscript/loader": "^0.28.9",
+    "@btc-vision/as-bignum": "^0.1.2",
+    "@btc-vision/assemblyscript": "^0.29.2",
+    "@btc-vision/bitcoin": "^6.5.6",
+    "@btc-vision/btc-runtime": "^1.11.0-rc.9",
+    "@btc-vision/opnet-transform": "^1.2.0",
+    "opnet": "^1.8.1-rc.14"
+  },
+  "devDependencies": {
+    "@btc-vision/as-covers-assembly": "^0.4.4",
+    "@btc-vision/as-covers-transform": "^0.4.4",
+    "@btc-vision/as-pect-assembly": "^8.2.0",
+    "@btc-vision/as-pect-cli": "^8.2.0",
+    "@btc-vision/as-pect-transform": "^8.2.0",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.3.0",
+    "eslint": "^10.0.1",
+    "prettier": "^3.8.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.0"
+  },
+  "resolutions": {
+    "@btc-vision/btc-runtime": "^1.11.0-beta.1"
+  }
+}
