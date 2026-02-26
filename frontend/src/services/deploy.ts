@@ -74,10 +74,10 @@ export async function deployToken(
 
     const challenge = await provider.getChallenge();
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const deployResult = await wallet.web3.deployContract({
         from: walletAddress,
         utxos,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         bytecode: Buffer.from(wasmBytes) as any,
         feeRate: 2,
         priorityFee: 0n,
@@ -85,7 +85,7 @@ export async function deployToken(
         challenge,
         linkMLDSAPublicKeyToAddress: !mldsaAlreadyLinked,
         revealMLDSAPublicKey: !mldsaAlreadyLinked,
-    });
+    } as any);
 
     const tokenBech32 = deployResult.contractAddress;
     const tokenPubKey = deployResult.contractPubKey;
