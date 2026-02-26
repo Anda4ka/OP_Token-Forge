@@ -1,5 +1,5 @@
 # Build stage
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 WORKDIR /app
 
 # Copy frontend package files
@@ -13,7 +13,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Serve stage
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
 RUN npm install -g serve
 COPY --from=build /app/dist ./dist
