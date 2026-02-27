@@ -50,23 +50,6 @@ export function DeployProgress({ state, onSkipWaiting }: DeployProgressProps) {
 
                 {state.step === 'waiting_confirmation' && (
                     <div className="mt-4 space-y-3">
-                        {/* MLDSA status indicator */}
-                        <div className="flex items-center gap-2">
-                            {state.mldsaConfirmed ? (
-                                <>
-                                    <span className="text-success text-sm">&#x2713;</span>
-                                    <span className="text-xs text-success">MLDSA key confirmed</span>
-                                </>
-                            ) : (
-                                <>
-                                    <div className="w-4 h-4 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin" />
-                                    <span className="text-xs text-yellow-400">
-                                        Waiting for MLDSA key confirmation (required)...
-                                    </span>
-                                </>
-                            )}
-                        </div>
-
                         {/* Polling spinner */}
                         <div className="flex items-center gap-2">
                             <div className="w-4 h-4 border-2 border-accent border-t-transparent rounded-full animate-spin" />
@@ -75,7 +58,7 @@ export function DeployProgress({ state, onSkipWaiting }: DeployProgressProps) {
                             </span>
                         </div>
 
-                        {/* Skip button — only visible when MLDSA is confirmed + enough attempts */}
+                        {/* Skip button */}
                         {state.canSkip && onSkipWaiting && (
                             <div className="bg-surface-lighter border border-border rounded-lg p-3">
                                 <p className="text-xs text-gray-400 mb-2">
@@ -89,17 +72,6 @@ export function DeployProgress({ state, onSkipWaiting }: DeployProgressProps) {
                                 >
                                     Skip Waiting &rarr; Proceed to Registration
                                 </button>
-                            </div>
-                        )}
-
-                        {/* MLDSA blocking notice when skip is hidden */}
-                        {!state.mldsaConfirmed && (
-                            <div className="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-3">
-                                <p className="text-xs text-yellow-400/80">
-                                    Skip is disabled until MLDSA key is confirmed on-chain.
-                                    This prevents a &ldquo;Can not reassign MLDSA&rdquo; error
-                                    during registration.
-                                </p>
                             </div>
                         )}
                     </div>

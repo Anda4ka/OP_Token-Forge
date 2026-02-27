@@ -10,7 +10,7 @@ Deploy your own memecoins, DeFi tokens, or utility tokens directly on Bitcoin �
 2. **Fill in** token parameters (name, symbol, supply, decimals)
 3. **Deploy** — the dApp handles the two-step process:
    - Deploys the OP_20 WASM contract on-chain
-   - Waits for MLDSA key confirmation
+   - Waits for on-chain confirmation
    - Registers the token in the VibeTokenFactory registry
 4. **Done** — your token is live on Bitcoin L1
 
@@ -57,55 +57,11 @@ Open http://localhost:5173
 └── railway.json           # Railway config
 ```
 
-## Known Issue: OP_WALLET v1.8.1 Bug
+## MLDSA Key Management
 
-The OP_WALLET browser extension (v1.8.1) has a bug where `linkMLDSAPublicKeyToAddress` is **hardcoded to `true`** in three methods inside `background.js` (`signInteractionInternal`, `deployContract`, `cancelTransaction`), completely ignoring the dApp's parameter value.
+OP_WALLET handles MLDSA (quantum-resistant) key linking automatically — it derives the same keypair from your wallet seed and manages the one-time on-chain binding transparently.
 
-This causes the factory registration transaction (step 3) to revert with:
-
-> "Can not reassign existing MLDSA public key to legacy or hashed key."
-
-### Root Cause
-
-```javascript
-// In OP_WALLET v1.8.1 background.js (minified):
-// signInteractionInternal:
-linkMLDSAPublicKeyToAddress: true  // HARDCODED — ignores r.linkMLDSAPublicKeyToAddress
-
-// deployContract:
-linkMLDSAPublicKeyToAddress: true  // HARDCODED — ignores e.linkMLDSAPublicKeyToAddress
-
-// cancelTransaction:
-linkMLDSAPublicKeyToAddress: true  // HARDCODED — ignores e.linkMLDSAPublicKeyToAddress
-```
-
-### Fix
-
-Replace each hardcoded `true` with the dApp's parameter (defaulting to `true` for backward compatibility):
-
-```javascript
-// signInteractionInternal:
-linkMLDSAPublicKeyToAddress: r.linkMLDSAPublicKeyToAddress ?? true
-
-// deployContract:
-linkMLDSAPublicKeyToAddress: e.linkMLDSAPublicKeyToAddress ?? true
-
-// cancelTransaction:
-linkMLDSAPublicKeyToAddress: e.linkMLDSAPublicKeyToAddress ?? true
-```
-
-### Workaround
-
-Until the official fix is released, use our pre-patched wallet:
-
-1. Download [OP_WALLET v1.8.1 (patched)](https://github.com/Anda4ka/OP_Token-Forge/releases/latest) from Releases
-2. Extract the zip to a folder
-3. Open `chrome://extensions/` in Chrome
-4. Enable "Developer mode" (top right)
-5. Click "Load unpacked" and select the extracted folder
-6. Disable the original OP_WALLET extension to avoid conflicts
-
-**Bug report**: [btc-vision/opwallet#169](https://github.com/btc-vision/opwallet/issues/169)
+**Important**: Do not mix CLI-generated MLDSA keys (`.quantum_key` files) with OP_WALLET for the same address. The wallet derives its own MLDSA keypair from the seed, and if a different key was previously linked to your address via CLI scripts, subsequent wallet transactions will fail with "Can not reassign existing MLDSA public key." Use a fresh address if switching between CLI and wallet workflows.
 
 ## License
 
